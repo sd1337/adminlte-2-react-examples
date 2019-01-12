@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "adminlte-2-react": "^0.1.1",
     "chart.js": "^2.7.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-graphql": "^3.0.1",
