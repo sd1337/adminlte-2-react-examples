@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "adminlte-2-react": "^0.1.2",
     "chart.js": "^2.7.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-graphql": "^3.0.1",
@@ -14,6 +15,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
     "react-syntax-highlighter": "^10.1.2",
+    "source-sans-pro": "^2.45.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
@@ -31,5 +33,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "raw-loader": "^1.0.0"
+  }
 }

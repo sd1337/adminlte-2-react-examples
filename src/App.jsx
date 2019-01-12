@@ -8,7 +8,7 @@ import Dashboard from './pages/rebuilds/Dashboard';
 import DashboardV2 from './pages/rebuilds/DashboardV2';
 import ChartJS from './pages/rebuilds/charts/ChartJS';
 import Widgets from './pages/rebuilds/Widgets';
-import Default from './pages/rebuilds/ui-elements/modals/Default';
+import 'source-sans-pro/source-sans-pro.css';
 
 const { Item, Header } = Sidebar;
 class App extends Component {
@@ -43,7 +43,7 @@ class App extends Component {
             <Item text="Buttons" link="/ui-elements/buttons" />
             <Item text="Sliders" link="/ui-elements/sliders" />
             <Item text="Timeline" link="/ui-elements/timeline" />
-            <Item text="Modals" link="/ui-elements/modals" />
+            <Item text="Modals" link="/ui-elements/modals" activeOn="^/ui-elements/modals" />
           </Item>
           <Item link="#" text="Forms" icon="fa-edit">
             <Item text="General Elements" link="/forms/general" />
@@ -87,17 +87,15 @@ class App extends Component {
         <ComponentBuilder path="/component-builder" />
         <ExamplesWithJSX path="/examples-with-jsx" />
 
-        <DashboardV2 path="/" exact />
         <Dashboard path="/dashboard" exact />
-        <DashboardV2 path="/dashboardv2" exact />
+        <DashboardV2 path={['/', '/dashboardv2']} exact />
         <ChartJS path="/chart-js" exact />
         <Widgets path="/widgets" exact />
         <Route path="/ui-elements/general" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.general' */'./pages/rebuilds/ui-elements/General'))} />
         <Route path="/ui-elements/icons" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.icons' */'./pages/rebuilds/ui-elements/Icons'))} />
         <Route path="/ui-elements/buttons" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.buttons' */'./pages/rebuilds/ui-elements/Buttons'))} />
         <Route path="/ui-elements/sliders" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.sliders' */'./pages/rebuilds/ui-elements/Sliders'))} />
-        <Route path="/ui-elements/modals" component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.modals' */'./pages/rebuilds/ui-elements/Modals'))} />
-        <Default path="/ui-elements/modals/default" exact modal />
+        <Route path="/ui-elements/modals/:type?" component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.modals' */'./pages/rebuilds/ui-elements/Modals'))} />
         <Route path="/forms/general" exact component={AsyncComponent(() => import(/* webpackChunkName: 'form.general' */'./pages/rebuilds/forms/GeneralElements'))} />
         <Route path="/forms/advanced" exact component={AsyncComponent(() => import(/* webpackChunkName: 'form.advanced' */'./pages/rebuilds/forms/AdvancedElements'))} />
         <Route path="/tables/simple" exact component={AsyncComponent(() => import(/* webpackChunkName: 'tables.simple' */'./pages/rebuilds/tables/SimpleTables'))} />

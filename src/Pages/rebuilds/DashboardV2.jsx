@@ -1,110 +1,36 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved, jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import uuidv4 from 'uuid';
-import { Pie } from 'react-chartjs-2';
 
 import {
-  Content, Col, Row, Box, SparklineBox, Chatbox,
+  Content, Col, Row, Box, Chatbox,
   Memberbox, SimpleTable, Sparkbar, Button, NavList,
   NavListItem, ProductList, ProductListItem, Infobox, DescriptionBlock, ProgressGroup,
   Alert,
 } from 'adminlte-2-react';
 import InfoModal from './InfoModal';
 import {
-  infobox1, infobox2, infobox3, infobox4, alert, visitorsReport,
-  infobox5, infobox6, infobox7, infobox8, latestOrders,
+  alert, infobox5, infobox6, infobox7, infobox8, latestOrders, progressGroup1,
+  progressGroup2, progressGroup3, progressGroup4, descriptionBlock1,
+  descriptionBlock2, descriptionBlock3, descriptionBlock4, browserUsage,
 } from './DashboardV2.Info';
+import MonthlyRecapChart from './dashboardV2/MonthlyRecapChart';
+import monthlyRecapString from '!raw-loader!./dashboardV2/MonthlyRecapChart';
+
+import UpperInfoBoxes from './dashboardV2/UpperInfoBoxes';
+import upperInfoBoxesString from '!raw-loader!./dashboardV2/UpperInfoBoxes';
+
+import VisitorsReport from './dashboardV2/VisitorsReport';
+import visitorsReportString from '!raw-loader!./dashboardV2/VisitorsReport';
+
+import BrowserUsage from './dashboardV2/BrowserUsage';
+import browserUsageString from '!raw-loader!./dashboardV2/BrowserUsage';
 
 class DashboardV2 extends Component {
   state = {
-    browserUsageChartLegend: null,
     showInfoModal: false,
     infoModalText: false,
   }
-
-  browserUsageData = {
-    labels: ['Chrome', 'IE', 'FireFox', 'Safari', 'Opera', 'Navigator'],
-    datasets: [{
-      data: [700, 500, 400, 600, 300, 100],
-      backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-    }],
-  };
-
-  browserUsageOptions = {
-    // Boolean - Whether we should show a stroke on each segment
-    segmentShowStroke: true,
-    // String - The colour of each segment stroke
-    segmentStrokeColor: '#fff',
-    // Number - The width of each segment stroke
-    segmentStrokeWidth: 1,
-    // Number - The percentage of the chart that we cut out of the middle
-    cutoutPercentage: 50, // This is 0 for Pie charts
-    // Number - Amount of animation steps
-    animationSteps: 100,
-    // String - Animation easing effect
-    animationEasing: 'easeOutBounce',
-    // Boolean - Whether we animate the rotation of the Doughnut
-    animateRotate: true,
-    // Boolean - Whether we animate scaling the Doughnut from the centre
-    animateScale: false,
-    // Boolean - whether to make the chart responsive to window resizing
-    responsive: true,
-    // Boolean - whether to maintain the starting aspect
-    // ratio or not when responsive, if set to false, will take up entire container
-    maintainAspectRatio: false,
-    legend:
-    {
-      display: false,
-    },
-    // String - A legend template
-    legendCallback: (chart) => {
-      const mapColor = (color) => {
-        switch (color) {
-          case '#f56954':
-            return 'red';
-          case '#00a65a':
-            return 'green';
-          case '#f39c12':
-            return 'yellow';
-          case '#00c0ef':
-            return 'aqua';
-          case '#3c8dbc':
-            return 'light-blue';
-          case '#d2d6de':
-            return 'gray';
-          default:
-            return 'red';
-        }
-      };
-      const { backgroundColor } = chart.data.datasets[0];
-
-      return (
-        <ul className="chart-legend clearfix">
-          {chart.data.labels.map((p, i) => (
-            <li key={uuidv4()}>
-              <i className={`fa fa-circle-o text-${mapColor(backgroundColor[i])}`} />
-              {' '}
-              {p}
-            </li>
-          ))}
-        </ul>
-      );
-    },
-    tooltips: {
-      displayColors: false,
-      callbacks: {
-        label(tooltipItem, data) {
-          const { datasets, labels } = data;
-          const { index } = tooltipItem;
-          return `${datasets[0].data[index]} ${labels[index]} users`;
-        },
-      },
-    },
-    // legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<segments.length; i++){%><li><span style=\'background-color:<%=segments[i].fillColor%>\'></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
-    // String - A tooltip template
-    // tooltipTemplate: '<%=value %> <%=label%> users'
-  };
 
   latestOrdersColumns = [
     {
@@ -187,30 +113,14 @@ class DashboardV2 extends Component {
     },
   ];
 
-  constructor() {
+    constructor() {
     super();
     this.onHide = this.onHide.bind(this);
     this.showInfoModal = this.showInfoModal.bind(this);
   }
 
-  componentDidMount() {
-    const browserUsageChartLegend = this.browserUsageChart.chartInstance.generateLegend();
-    this.setState({ browserUsageChartLegend });
-  }
-
   onHide() {
     this.setState({ showInfoModal: false, infoModalText: null });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getBrowserUsageFooter() {
-    return (
-      <NavList pills stacked>
-        <NavListItem iconClass="fa-angle-down" color="red" iconLabel="12%" text="United States of America" onClick={() => { }} />
-        <NavListItem iconClass="fa-angle-up" color="green" iconLabel="4%" text="India" onClick={() => { }} />
-        <NavListItem iconClass="fa-angle-left" color="yellow" iconLabel="0%" text="China" onClick={() => { }} />
-      </NavList>
-    );
   }
 
   showInfoModal(text) {
@@ -218,46 +128,15 @@ class DashboardV2 extends Component {
   }
 
   render() {
-    const { browserUsageChartLegend, showInfoModal, infoModalText } = this.state;
+    const { showInfoModal, infoModalText } = this.state;
     return (
       <Content title="Dashboard" subTitle="Version 2.0">
         <div onClick={() => this.showInfoModal(alert)}>
           <Alert closable type="info" title="Inspection Info" icon="fa-info">Most components will show their jsx code when you click on them! - Try me</Alert>
         </div>
         <InfoModal show={showInfoModal} onHide={this.onHide} text={infoModalText} />
-        <Row>
-          <Col xs={12} sm={6} md={3} onClick={() => this.showInfoModal(infobox1)}>
-            <Infobox
-              icon="ion-ios-gear-outline"
-              color="aqua"
-              number={[90, <small key="temp">%</small>]}
-              text="CPU TRAFFIC"
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} onClick={() => this.showInfoModal(infobox2)}>
-            <Infobox
-              icon="fab-google-plus-g"
-              color="red"
-              number="41,410"
-              text="Likes"
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} onClick={() => this.showInfoModal(infobox3)}>
-            <Infobox
-              icon="ion-ios-cart-outline"
-              color="green"
-              number="Sales"
-              text="760"
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} onClick={() => this.showInfoModal(infobox4)}>
-            <Infobox
-              icon="ion-ios-people-outline"
-              color="yellow"
-              number="2,000"
-              text="New Members"
-            />
-          </Col>
+        <Row onClick={() => this.showInfoModal(upperInfoBoxesString)}>
+          <UpperInfoBoxes />
         </Row>
         <Row>
           <Col md={12}>
@@ -269,7 +148,7 @@ class DashboardV2 extends Component {
               options={<ul />}
               footer={(
                 <Row>
-                  <Col sm={3} xs={6}>
+                  <Col sm={3} xs={6} onClick={() => this.showInfoModal(descriptionBlock1)}>
                     <DescriptionBlock
                       percentage={17}
                       percentageColor="green"
@@ -278,7 +157,7 @@ class DashboardV2 extends Component {
                       indication="up"
                     />
                   </Col>
-                  <Col sm={3} xs={6}>
+                  <Col sm={3} xs={6} onClick={() => this.showInfoModal(descriptionBlock2)}>
                     <DescriptionBlock
                       percentage={0}
                       percentageColor="yellow"
@@ -287,7 +166,7 @@ class DashboardV2 extends Component {
                       indication="left"
                     />
                   </Col>
-                  <Col sm={3} xs={6}>
+                  <Col sm={3} xs={6} onClick={() => this.showInfoModal(descriptionBlock3)}>
                     <DescriptionBlock
                       percentage={20}
                       percentageColor="green"
@@ -296,7 +175,7 @@ class DashboardV2 extends Component {
                       indication="up"
                     />
                   </Col>
-                  <Col sm={3} xs={6}>
+                  <Col sm={3} xs={6} onClick={() => this.showInfoModal(descriptionBlock4)}>
                     <DescriptionBlock
                       percentage={18}
                       percentageColor="red"
@@ -309,24 +188,50 @@ class DashboardV2 extends Component {
               )}
             >
               <Row>
-                <Col md={8}>
+                <Col md={8} onClick={() => this.showInfoModal(monthlyRecapString)}>
                   <p className="text-center">
                     <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
                   </p>
-
-                  <div className="chart">
-                    {/* Sales Chart Canvas */}
-                    <canvas id="salesChart" style={{ height: '180px' }} />
+                  <div className="chart" style={{ height: '180px' }}>
+                    <MonthlyRecapChart />
                   </div>
                 </Col>
                 <Col md={4}>
                   <p className="text-center">
                     <strong>Goal Completion</strong>
                   </p>
-                  <ProgressGroup text="Add Products to Cart" maxValue={200} currentValue={160} color="aqua" />
-                  <ProgressGroup text="Complete Purchase" maxValue={400} currentValue={310} color="red" />
-                  <ProgressGroup text="Visit Premium Page" maxValue={800} currentValue={480} color="green" />
-                  <ProgressGroup text="Send Inquiries" maxValue={500} currentValue={250} color="yellow" />
+                  <div onClick={() => this.showInfoModal(progressGroup1)}>
+                    <ProgressGroup
+                      text="Add Products to Cart"
+                      maxValue={200}
+                      currentValue={160}
+                      color="aqua"
+                    />
+                  </div>
+                  <div onClick={() => this.showInfoModal(progressGroup2)}>
+                    <ProgressGroup
+                      text="Complete Purchase"
+                      maxValue={400}
+                      currentValue={310}
+                      color="red"
+                    />
+                  </div>
+                  <div onClick={() => this.showInfoModal(progressGroup3)}>
+                    <ProgressGroup
+                      text="Visit Premium Page"
+                      maxValue={800}
+                      currentValue={480}
+                      color="green"
+                    />
+                  </div>
+                  <div onClick={() => this.showInfoModal(progressGroup4)}>
+                    <ProgressGroup
+                      text="Send Inquiries"
+                      maxValue={500}
+                      currentValue={250}
+                      color="yellow"
+                    />
+                  </div>
                 </Col>
               </Row>
             </Box>
@@ -334,23 +239,8 @@ class DashboardV2 extends Component {
         </Row>
         <Row>
           <Col md={8}>
-            <div onClick={() => this.showInfoModal(visitorsReport)}>
-              <Box type="success" collapsable closable noPadding title="Visitors Report">
-                <Row>
-                  <Col md={9} sm={8}>
-                    <div className="pad">
-                      <div style={{ height: '325px' }} />
-                    </div>
-                  </Col>
-                  <Col md={3} sm={4}>
-                    <div className="pad box-pane-right bg-green" style={{ minHeight: '280px' }}>
-                      <SparklineBox text="Visits" header="8390" chartData={[90, 70, 90, 70, 75, 80, 70]} />
-                      <SparklineBox text="Referrals" header="30%" chartData={[90, 50, 90, 70, 61, 83, 63]} />
-                      <SparklineBox text="Organic" header="70%" chartData={[90, 50, 90, 70, 61, 83, 63]} />
-                    </div>
-                  </Col>
-                </Row>
-              </Box>
+            <div onClick={() => this.showInfoModal(visitorsReportString)}>
+              <VisitorsReport />
             </div>
             <Row>
               <Col md={6}>
@@ -427,16 +317,9 @@ class DashboardV2 extends Component {
                 progressText="40% Increase in 30 Days"
               />
             </div>
-            <Box key="browserUsage" collapsable closable title="Browser Usage" footer={this.getBrowserUsageFooter()} footerClass="no-padding">
-              <Row>
-                <Col md={8}>
-                  <Pie key="browserUsageChart" ref={(c) => { this.browserUsageChart = c; }} data={this.browserUsageData} options={this.browserUsageOptions} height={150} />
-                </Col>
-                <Col md={4}>
-                  {browserUsageChartLegend}
-                </Col>
-              </Row>
-            </Box>
+            <div onClick={() => this.showInfoModal(browserUsageString)}>
+              <BrowserUsage />
+            </div>
             <Box type="primary" title="Recently Added Products" closable collapsable footer={<a href="/" className="uppercase">View All Products</a>} footerClass="text-center">
               <ProductList inBox>
                 <ProductListItem image="img/default-50x50.gif" title="Samsung TV" label="$1800" labelType="warning" description={'Samsung 32" 1080p 60Hz LED Smart HDTV.'} />
