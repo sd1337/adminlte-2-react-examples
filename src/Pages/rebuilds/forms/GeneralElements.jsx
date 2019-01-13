@@ -113,9 +113,9 @@ const GeneralElements = () => (
           <Text label="Text Disabled" labelPosition="above" placeholder="Enter ..." disabled />
           <Text label="Textarea" inputType="textarea" rows={3} labelPosition="above" placeholder="Enter ..." />
           <Text label="Textarea Disabled" inputType="textarea" rows={3} labelPosition="above" placeholder="Enter ..." disabled />
-          <Text type="success" labelPosition="above" label="Input with success" labelIconClass="fa-check" placeholder="Enter ..." help="Help block with success" />
-          <Text type="warning" labelPosition="above" label="Input with warning" labelIconClass="fa-bell-o" placeholder="Enter ..." help="Help block with warning" />
-          <Text type="error" labelPosition="above" label="Input with error" labelIconClass="fa-times-circle-o" placeholder="Enter ..." help="Help block with error" />
+          <Text type="success" labelPosition="above" label="Input with success" labelIcon="fas-check" placeholder="Enter ..." help="Help block with success" />
+          <Text type="warning" labelPosition="above" label="Input with warning" labelIcon="far-bell" placeholder="Enter ..." help="Help block with warning" />
+          <Text type="error" labelPosition="above" label="Input with error" labelIcon="far-times-circle" placeholder="Enter ..." help="Help block with error" />
           <Checkbox label="Checkbox 1" />
           <Checkbox label="Checkbox 2" />
           <Checkbox label="Checkbox disabled" disabled />
@@ -140,7 +140,7 @@ const GeneralElements = () => (
               { label: 'option 4', value: '4' },
               { label: 'option 5', value: '5' },
             ]}
-            value={['', '']}
+            value={1}
           />
           <Select
             label="Select Disabled"
