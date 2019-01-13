@@ -18,71 +18,71 @@ class App extends Component {
     return (
       <AdminLTE browserTitle="adminlte-2-react-examples" theme="black">
         <Sidebar.Core>
-          <Item icon="fas-pencil-ruler" text="Component Builder" link="/component-builder" />
-          <Item icon="fas-code" text="Examples with JSX" link="/examples-with-jsx" />
+          <Item icon="fas-pencil-ruler" text="Component Builder" to="/component-builder" />
+          <Item icon="fas-code" text="Examples with JSX" to="/examples-with-jsx" />
           <Header text="MAIN NAVIGATION" />
           <Item active text="Dashboard" icon="fa-tachometer-alt">
-            <Item text="Dashboard v1" link="/dashboard" />
-            <Item text="Dashboard v2" link="/dashboardv2" />
+            <Item text="Dashboard v1" to="/dashboard" />
+            <Item text="Dashboard v2" to="/dashboardv2" />
           </Item>
-          <Item link="#" text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
-            <Item text="Top Navigation" link="/top-nav" />
-            <Item text="Boxed" link="/boxed" />
-            <Item text="Fixed" link="/fixed" />
-            <Item text="Collapsed Sidebar" link="/collapsed-sidebar" />
+          <Item to="#" text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
+            <Item text="Top Navigation" to="/top-nav" />
+            <Item text="Boxed" to="/boxed" />
+            <Item text="Fixed" to="/fixed" />
+            <Item text="Collapsed Sidebar" to="/collapsed-sidebar" />
           </Item>
-          <Item link="/widgets" text="Widgets" icon="fa-th" labels={[{ color: 'green', text: 'new', small: true }]} />
+          <Item to="/widgets" text="Widgets" icon="fa-th" labels={[{ color: 'green', text: 'new', small: true }]} />
           <Item text="Charts" icon="fa-chart-pie">
-            <Item text="ChartJS" link="/chart-js" />
-            <Item text="Morris" link="/morris" />
-            <Item text="Flot" link="/flot" />
+            <Item text="ChartJS" to="/chart-js" />
+            <Item text="Morris" to="/morris" />
+            <Item text="Flot" to="/flot" />
           </Item>
-          <Item link="#" text="UI Elements" icon="fa-laptop">
-            <Item text="General" link="/ui-elements/general" />
-            <Item text="Icons" link="/ui-elements/icons" />
-            <Item text="Buttons" link="/ui-elements/buttons" />
-            <Item text="Sliders" link="/ui-elements/sliders" />
-            <Item text="Timeline" link="/ui-elements/timeline" />
-            <Item text="Modals" link="/ui-elements/modals" activeOn="^/ui-elements/modals" />
+          <Item to="#" text="UI Elements" icon="fa-laptop">
+            <Item text="General" to="/ui-elements/general" />
+            <Item text="Icons" to="/ui-elements/icons" />
+            <Item text="Buttons" to="/ui-elements/buttons" />
+            <Item text="Sliders" to="/ui-elements/sliders" />
+            <Item text="Timeline" to="/ui-elements/timeline" />
+            <Item text="Modals" to="/ui-elements/modals" activeOn="^/ui-elements/modals" />
           </Item>
-          <Item link="#" text="Forms" icon="fa-edit">
-            <Item text="General Elements" link="/forms/general" />
-            <Item text="Advanced Elements" link="/forms/advanced" />
-            <Item text="Editors" link="/forms/editors" />
+          <Item to="#" text="Forms" icon="fa-edit">
+            <Item text="General Elements" to="/forms/general" />
+            <Item text="Advanced Elements" to="/forms/advanced" />
+            <Item text="Editors" to="/forms/editors" />
           </Item>
-          <Item link="#" text="Tables" icon="fa-table">
-            <Item text="Simple tables" link="/tables/simple" />
-            <Item text="Data tables" link="/tables/data" />
+          <Item to="#" text="Tables" icon="fa-table">
+            <Item text="Simple tables" to="/tables/simple" />
+            <Item text="Data tables" to="/tables/data" />
           </Item>
-          <Item link="/calendar" text="Calendar" icon="fa-calendar" labels={[{ small: true, text: 3, color: 'red' }, { small: true, text: 17, color: 'blue' }]} />
-          <Item link="/mailbox" text="Mailbox" icon="fa-envelope" labels={[{ small: true, text: 12, color: 'yellow' }, { small: true, text: 16, color: 'green' }, { small: true, text: 5, color: 'red' }]} />
-          <Item link="#" text="Examples" icon="fa-folder">
-            <Item text="Invoice" link="/examples/invoice" />
-            <Item text="Profile" link="/examples/profile" />
-            <Item text="Login" link="/examples/login" />
-            <Item text="Register" link="/examples/register" />
-            <Item text="Lockscreen" link="/examples/lockscreen" />
-            <Item text="404 Error" link="/examples/404-error" />
-            <Item text="500 Error" link="/examples/500-error" />
-            <Item text="Blank Page" link="/examples/blank-page" />
-            <Item text="Pace Page" link="/examples/pace-page" />
+          <Item to="/calendar" text="Calendar" icon="fa-calendar" labels={[{ small: true, text: 3, color: 'red' }, { small: true, text: 17, color: 'blue' }]} />
+          <Item to="/mailbox" text="Mailbox" icon="fa-envelope" labels={[{ small: true, text: 12, color: 'yellow' }, { small: true, text: 16, color: 'green' }, { small: true, text: 5, color: 'red' }]} />
+          <Item to="#" text="Examples" icon="fa-folder">
+            <Item text="Invoice" to="/examples/invoice" />
+            <Item text="Profile" to="/examples/profile" />
+            <Item text="Login" to="/examples/login" />
+            <Item text="Register" to="/examples/register" />
+            <Item text="Lockscreen" to="/examples/lockscreen" />
+            <Item text="404 Error" to="/examples/404-error" />
+            <Item text="500 Error" to="/examples/500-error" />
+            <Item text="Blank Page" to="/examples/blank-page" />
+            <Item text="Pace Page" to="/examples/pace-page" />
           </Item>
-          <Item link="#" text="Multilevel" icon="fa-share">
-            <Item text="Level One" link="/mulitlevel/one" />
-            <Item text="Level One" link="/mulitlevel/one">
-              <Item text="Level Two" link="/mulitlevel/two" />
-              <Item text="Level Two" link="/mulitlevel/two">
-                <Item text="Level Tree" link="/mulitlevel/tree" />
-                <Item text="Level Tree" link="/mulitlevel/tree" />
+          <Item to="#" text="Multilevel" icon="fa-share">
+            <Item text="Level One" to="/mulitlevel/one" />
+            <Item text="Level One" to="/mulitlevel/one">
+              <Item text="Level Two" to="/mulitlevel/two" />
+              <Item text="Level Two" to="/mulitlevel/two">
+                <Item text="Level Tree" to="/mulitlevel/tree" />
+                <Item text="Level Tree" to="/mulitlevel/tree" />
               </Item>
-              <Item text="Level Two" link="/mulitlevel/two" />
+              <Item text="Level Two" to="/mulitlevel/two" />
             </Item>
-            <Item text="Level One" link="/mulitlevel/one" />
+            <Item text="Level One" to="/mulitlevel/one" />
           </Item>
           <li className="header">LABELS</li>
-          <Item link="#" text="Important" color="red" />
-          <Item link="#" text="Warning" color="yellow" />
-          <Item link="#" text="Information" color="aqua" />
+          <Item to="#" text="Important" color="red" />
+          <Item to="#" text="Warning" color="yellow" />
+          <Item to="#" text="Information" color="aqua" />
         </Sidebar.Core>
         <ComponentBuilder path="/component-builder" />
         <ExamplesWithJSX path="/examples-with-jsx" />

@@ -1,18 +1,16 @@
 /* eslint-disable import/no-webpack-loader-syntax, import/no-unresolved, jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
-import uuidv4 from 'uuid';
 
 import {
-  Content, Col, Row, Box, Chatbox,
-  Memberbox, SimpleTable, Sparkbar, Button, NavList,
-  NavListItem, ProductList, ProductListItem, Infobox, DescriptionBlock, ProgressGroup,
+  Content, Col, Row, Box, Chatbox, Memberbox,
+  ProductList, ProductListItem, Infobox, DescriptionBlock, ProgressGroup,
   Alert,
 } from 'adminlte-2-react';
 import InfoModal from './InfoModal';
 import {
   alert, infobox5, infobox6, infobox7, infobox8, latestOrders, progressGroup1,
   progressGroup2, progressGroup3, progressGroup4, descriptionBlock1,
-  descriptionBlock2, descriptionBlock3, descriptionBlock4, browserUsage,
+  descriptionBlock2, descriptionBlock3, descriptionBlock4,
 } from './DashboardV2.Info';
 import MonthlyRecapChart from './dashboardV2/MonthlyRecapChart';
 import monthlyRecapString from '!raw-loader!./dashboardV2/MonthlyRecapChart';
@@ -25,6 +23,9 @@ import visitorsReportString from '!raw-loader!./dashboardV2/VisitorsReport';
 
 import BrowserUsage from './dashboardV2/BrowserUsage';
 import browserUsageString from '!raw-loader!./dashboardV2/BrowserUsage';
+import LatestOrders from './dashboardV2/LatestOrders';
+
+import defaultImg from '../../assets/img/default-50x50.gif';
 
 class DashboardV2 extends Component {
   state = {
@@ -32,88 +33,7 @@ class DashboardV2 extends Component {
     infoModalText: false,
   }
 
-  latestOrdersColumns = [
-    {
-      title: 'Order ID',
-      data: 'id',
-      render: data => <a href="pages/examples/invoice.html">{data}</a>,
-    },
-    {
-      title: 'Item',
-      data: 'item',
-    },
-    {
-      title: 'Status',
-      data: 'status',
-      render: (data, rowData) => <span className={`label label-${rowData.type}`}>{data}</span>,
-    },
-    {
-      title: 'Popularity',
-      data: 'popularity',
-      render: (data, rowData) => <Sparkbar color={rowData.color} height="20" data={data} />,
-    },
-  ];
-
-  latestOrdersData = [
-    {
-      id: 'OR9842',
-      item: 'Call of Duty IV',
-      status: 'Shipped',
-      popularity: [90, 80, 90, -70, 61, -83, 63],
-      color: '#00a65a',
-      type: 'success',
-    },
-    {
-      id: 'OR1848',
-      item: 'Samsung Smart TV',
-      status: 'Pending',
-      popularity: [90, 80, -90, 70, 61, -83, 68],
-      color: '#f39c12',
-      type: 'warning',
-    },
-    {
-      id: 'OR7429',
-      item: 'iPhone 6 Plus',
-      status: 'Delivered',
-      popularity: [90, -80, 90, 70, -61, 83, 63],
-      color: '#f56954',
-      type: 'danger',
-    },
-    {
-      id: 'OR7429',
-      item: 'Samsung Smart TV',
-      status: 'Processing',
-      popularity: [90, 80, -90, 70, -61, 83, 63],
-      color: '#00c0ef',
-      type: 'info',
-    },
-    {
-      id: 'OR1848',
-      item: 'Samsung Smart TV',
-      status: 'Pending',
-      popularity: [90, 80, -90, 70, 61, -83, 68],
-      color: '#f39c12',
-      type: 'warning',
-    },
-    {
-      id: 'OR7429',
-      item: 'iPhone 6 Plus',
-      status: 'Delivered',
-      popularity: [90, -80, 90, 70, -61, 83, 63],
-      color: '#f56954',
-      type: 'danger',
-    },
-    {
-      id: 'OR9842',
-      item: 'Call of Duty IV',
-      status: 'Shipped',
-      popularity: [90, 80, 90, -70, 61, -83, 63],
-      color: '#00a65a',
-      type: 'success',
-    },
-  ];
-
-    constructor() {
+  constructor() {
     super();
     this.onHide = this.onHide.bind(this);
     this.showInfoModal = this.showInfoModal.bind(this);
@@ -261,15 +181,7 @@ class DashboardV2 extends Component {
               </Col>
             </Row>
             <div onClick={() => this.showInfoModal(latestOrders)}>
-              <Box
-                type="info"
-                title="Latest Orders"
-                collapsable
-                closable
-                footer={[<Button key="place-new-order" size="sm" text="Place New Order" flat pullLeft type="info" />, <Button key="view-all-orders" size="sm" text="View All Orders" flat pullRight />]}
-              >
-                <SimpleTable columns={this.latestOrdersColumns} data={this.latestOrdersData} />
-              </Box>
+              <LatestOrders />
             </div>
           </Col>
           <Col md={4}>
@@ -322,10 +234,10 @@ class DashboardV2 extends Component {
             </div>
             <Box type="primary" title="Recently Added Products" closable collapsable footer={<a href="/" className="uppercase">View All Products</a>} footerClass="text-center">
               <ProductList inBox>
-                <ProductListItem image="img/default-50x50.gif" title="Samsung TV" label="$1800" labelType="warning" description={'Samsung 32" 1080p 60Hz LED Smart HDTV.'} />
-                <ProductListItem image="img/default-50x50.gif" title="Bicycle" label="$700" labelType="info" description={'26" Mongoose Dolomite Men\'s 7-speed, Navy Blue.'} />
-                <ProductListItem image="img/default-50x50.gif" title="Xbox One" label="$350" labelType="danger" description="Xbox One Console Bundle with Halo Master Chief Collection." />
-                <ProductListItem image="img/default-50x50.gif" title="PlayStation 4" label="$399" labelType="success" description="PlayStation 4 500GB Console (PS4)" />
+                <ProductListItem image={defaultImg} title="Samsung TV" label="$1800" labelType="warning" description={'Samsung 32" 1080p 60Hz LED Smart HDTV.'} />
+                <ProductListItem image={defaultImg} title="Bicycle" label="$700" labelType="info" description={'26" Mongoose Dolomite Men\'s 7-speed, Navy Blue.'} />
+                <ProductListItem image={defaultImg} title="Xbox One" label="$350" labelType="danger" description="Xbox One Console Bundle with Halo Master Chief Collection." />
+                <ProductListItem image={defaultImg} title="PlayStation 4" label="$399" labelType="success" description="PlayStation 4 500GB Console (PS4)" />
               </ProductList>
             </Box>
           </Col>
