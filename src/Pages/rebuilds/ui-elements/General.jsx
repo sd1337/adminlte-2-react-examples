@@ -251,6 +251,18 @@ class General extends Component {
         </Row>
         <h2 className="page-header">Bootstrap Accordion &amp; Carousel</h2>
         <Row>
+          <Col xs={12}>
+            <Alert closable type="danger" icon="fa-ban" title="Alert!">
+              Carousel and accordion are still work in progress and currently broken, if you already need those components look at
+              {' '}
+              <code>react-bootstrap</code>
+              {' '}
+              <a href="https://react-bootstrap.github.io/components/panel/" target="_blank" rel="noopener noreferrer">PanelGrouo</a>
+              {' and '}
+              <a href="https://react-bootstrap.github.io/components/carousel/" target="_blank" rel="noopener noreferrer">Carousel</a>
+              {' Components'}
+            </Alert>
+          </Col>
           {/* TODO: fix accordion */}
           <Col md={6}>
             <Box solid title="Collapsible Accordion">

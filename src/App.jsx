@@ -12,7 +12,129 @@ import 'source-sans-pro/source-sans-pro.css';
 
 const { Item, Header } = Sidebar;
 class App extends Component {
-  state={}
+  state = {}
+
+  loadedElements = {}
+
+  getAsync(path) {
+    const asyncRequire = () => {
+      switch (path) {
+        case '/ui-elements/general':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'ui-elements.general' */'./pages/rebuilds/ui-elements/General');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/ui-elements/icons':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'ui-elements.icons' */'./pages/rebuilds/ui-elements/Icons');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/ui-elements/buttons':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'ui-elements.buttons' */'./pages/rebuilds/ui-elements/Buttons');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/ui-elements/sliders':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'ui-elements.sliders' */'./pages/rebuilds/ui-elements/Sliders');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/ui-elements/modals/:type?':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'ui-elements.modals' */'./pages/rebuilds/ui-elements/Modals');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/forms/general':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'form.general' */'./pages/rebuilds/forms/GeneralElements');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/forms/advanced':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'form.advanced' */'./pages/rebuilds/forms/AdvancedElements');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/tables/simple':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'tables.simple' */'./pages/rebuilds/tables/SimpleTables');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/tables/data':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'tables.data' */'./pages/rebuilds/tables/DataTables');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        case '/calendar':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'calendar' */'./pages/rebuilds/Calendar');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
+        default:
+          return null;
+      }
+    };
+    return <Route path={path} exact component={asyncRequire(path)} />;
+  }
 
   render() {
     return (
@@ -22,7 +144,7 @@ class App extends Component {
           <Item icon="fas-code" text="Examples with JSX" to="/examples-with-jsx" />
           <Header text="MAIN NAVIGATION" />
           <Item active text="Dashboard" icon="fa-tachometer-alt">
-            <Item text="Dashboard v1" to="/dashboard" />
+            <Item text="Dashboard v1" to="/dashboard" activeOn="^/$" />
             <Item text="Dashboard v2" to="/dashboardv2" />
           </Item>
           <Item to="#" text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
@@ -91,16 +213,16 @@ class App extends Component {
         <DashboardV2 path={['/', '/dashboardv2']} exact />
         <ChartJS path="/chart-js" exact />
         <Widgets path="/widgets" exact />
-        <Route path="/ui-elements/general" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.general' */'./pages/rebuilds/ui-elements/General'))} />
-        <Route path="/ui-elements/icons" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.icons' */'./pages/rebuilds/ui-elements/Icons'))} />
-        <Route path="/ui-elements/buttons" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.buttons' */'./pages/rebuilds/ui-elements/Buttons'))} />
-        <Route path="/ui-elements/sliders" exact component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.sliders' */'./pages/rebuilds/ui-elements/Sliders'))} />
-        <Route path="/ui-elements/modals/:type?" component={AsyncComponent(() => import(/* webpackChunkName: 'ui-elements.modals' */'./pages/rebuilds/ui-elements/Modals'))} />
-        <Route path="/forms/general" exact component={AsyncComponent(() => import(/* webpackChunkName: 'form.general' */'./pages/rebuilds/forms/GeneralElements'))} />
-        <Route path="/forms/advanced" exact component={AsyncComponent(() => import(/* webpackChunkName: 'form.advanced' */'./pages/rebuilds/forms/AdvancedElements'))} />
-        <Route path="/tables/simple" exact component={AsyncComponent(() => import(/* webpackChunkName: 'tables.simple' */'./pages/rebuilds/tables/SimpleTables'))} />
-        <Route path="/tables/data" exact component={AsyncComponent(() => import(/* webpackChunkName: 'tables.data' */'./pages/rebuilds/tables/DataTables'))} />
-        <Route path="/calendar" exact component={AsyncComponent(() => import(/* webpackChunkName: 'calendar' */'./pages/rebuilds/Calendar'))} />
+        {this.getAsync('/ui-elements/general')}
+        {this.getAsync('/ui-elements/icons')}
+        {this.getAsync('/ui-elements/buttons')}
+        {this.getAsync('/ui-elements/sliders')}
+        {this.getAsync('/ui-elements/modals/:type?')}
+        {this.getAsync('/forms/general')}
+        {this.getAsync('/forms/advanced')}
+        {this.getAsync('/tables/simple')}
+        {this.getAsync('/tables/data')}
+        {this.getAsync('/calendar')}
       </AdminLTE>
     );
   }

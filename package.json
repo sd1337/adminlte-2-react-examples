@@ -35,6 +35,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "eslint-plugin-react": "^7.12.3",
     "raw-loader": "^1.0.0"
   }
 }
