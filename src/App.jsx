@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import AdminLTE, { Sidebar, AsyncComponent } from 'adminlte-2-react';
+import AdminLTE, { Sidebar, AsyncComponent, Footer } from 'adminlte-2-react';
 import ComponentBuilder from './pages/ComponentBuilder';
 import ExamplesWithJSX from './pages/ExamplesWithJSX';
 
@@ -138,7 +138,7 @@ class App extends Component {
 
   render() {
     return (
-      <AdminLTE browserTitle="adminlte-2-react-examples" theme="black">
+      <AdminLTE browserTitle="adminlte-2-react-examples" theme="black" footer={<Footer />}>
         <Sidebar.Core>
           <Item icon="fas-pencil-ruler" text="Component Builder" to="/component-builder" />
           <Item icon="fas-code" text="Examples with JSX" to="/examples-with-jsx" />
