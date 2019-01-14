@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import {
-  Content, Row, Col, Box, Button,
+  Content, Row, Col, Box, Button, Inputs,
 } from 'adminlte-2-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Select2 from '../../../a2r-local/content/Inputs/Select2';
+// import Select2 from '../../../a2r-local/content/Inputs/Select2';
 import InfoModal from '../InfoModal';
-import { select21, select22, select23, select24 } from './AdvancedElements.Info';
+import {
+  select21, select22, select23, select24,
+} from './AdvancedElements.Info';
 
-// const { Select2 } = Inputs;
+const { Select2 } = Inputs;
 
 class AdvancedElements extends Component {
   state = { selectedSelect2Value: 'Alabama', select2Disabled: true, showInfoModal: false }
