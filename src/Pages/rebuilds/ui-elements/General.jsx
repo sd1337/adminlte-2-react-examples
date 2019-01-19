@@ -269,8 +269,8 @@ class General extends Component {
               <PanelGroup
                 accordion
                 id="accordion-controlled-example"
-                onSelect={this.handleSelect}
-                activeKey="1"
+                // onSelect={this.handleSelect}
+                // activeKey="1"
               >
                 <Panel eventKey="1">
                   <Panel.Heading>

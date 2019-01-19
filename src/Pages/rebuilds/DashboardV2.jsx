@@ -30,7 +30,7 @@ import defaultImg from '../../assets/img/default-50x50.gif';
 class DashboardV2 extends Component {
   state = {
     showInfoModal: false,
-    infoModalText: false,
+    infoModalText: null,
   }
 
   constructor() {

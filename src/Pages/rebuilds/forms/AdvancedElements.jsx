@@ -3,16 +3,27 @@ import {
   Content, Row, Col, Box, Button, Inputs,
 } from 'adminlte-2-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import Select2 from '../../../a2r-local/content/Inputs/Select2';
+import moment from 'moment';
+
+import Select2 from '../../../a2r-local/content/Inputs/Select2';
 import InfoModal from '../InfoModal';
 import {
   select21, select22, select23, select24,
 } from './AdvancedElements.Info';
 
-const { Select2 } = Inputs;
+const {
+  Text, Date, DateRange, ICheck,
+} = Inputs;
 
 class AdvancedElements extends Component {
-  state = { selectedSelect2Value: 'Alabama', select2Disabled: true, showInfoModal: false }
+  state = {
+    selectedSelect2Value: null,
+    select2Disabled: true,
+    showInfoModal: false,
+    simpleOptionsInState: ['Alabama', 'Alaska', 'California', 'Delaware'],
+    startDate: moment().startOf('year'),
+    endDate: moment().endOf('year'),
+  }
 
   simpleOptions = ['Alabama', 'Alaska', 'California', 'Delaware', 'Tennessee', 'Texas', 'Washington']
 
@@ -38,7 +49,7 @@ class AdvancedElements extends Component {
   getInfoTitle(label, infotext) {
     return (
       <React.Fragment>
-        {`${label} `}
+        {`${label}  `}
         <FontAwesomeIcon onClick={() => this.showInfoModal(infotext)} style={{ cursor: 'pointer' }} icon={['fas', 'info-circle']} />
       </React.Fragment>
     );
@@ -50,7 +61,8 @@ class AdvancedElements extends Component {
 
   render() {
     const {
-      selectedSelect2Value, select2Disabled, showInfoModal, infoModalText,
+      selectedSelect2Value, select2Disabled, showInfoModal, infoModalText, simpleOptionsInState,
+      startDate, endDate,
     } = this.state;
     return (
       <Content title="Advanced Form Elements" subTitle="Preview" browserTitle="AdminLTE 2 | Advanced form elements">
@@ -99,6 +111,13 @@ class AdvancedElements extends Component {
                 }}
                 allowClear
               />
+              <Select2
+                labelPosition="above"
+                label={this.getInfoTitle('Depends on multiple selected', select21)}
+                // value={selectedSelect2Value}
+                options={simpleOptionsInState}
+                buttonRight={<Button icon="fas-info-circle" onClick={() => this.showInfoModal(select21)} />}
+              />
             </Col>
             <Col md={6}>
               <Select2
@@ -107,20 +126,91 @@ class AdvancedElements extends Component {
                 multiple
                 label={this.getInfoTitle('Multiple', select23)}
                 options={this.simpleOptions}
+                onChange={(event) => {
+                  const { params: { data } } = event;
+                  data.forEach((p) => {
+                    console.log(p);
+                  });
+                }}
+              />
+              <Select2
+                labelPosition="above"
+                placeholder="Select a state"
+                multiple
+                label={this.getInfoTitle('Multiple selected', select23)}
+                options={this.simpleOptions}
+                value={simpleOptionsInState}
+                onUnselect={({ params: { data } }) => {
+                  this.setState({ simpleOptionsInState: data });
+                }}
+                onSelect={({ params: { data } }) => {
+                  this.setState({ simpleOptionsInState: data });
+                }}
               />
               <Select2
                 labelPosition="above"
                 label={this.getInfoTitle('Disabled Result', select24)}
                 defaultValue="Alabama"
                 onChange={(event) => {
-                  const { params: { data: { value } } } = event;
-                  this.setState({ selectedSelect2Value: value });
+                  const { params: { data } } = event;
+                  this.setState({ selectedSelect2Value: data });
                 }}
                 options={this.disabledResultOptions}
               />
             </Col>
           </Row>
         </Box>
+        <Row>
+          <Col xs={6}>
+            <Box title="Input masks" type="danger">
+              <Text label={this.getInfoTitle('Date masks:', 'none')} labelPosition="above" iconLeft="fas-calendar" />
+              <Text labelPosition="none" iconLeft="fas-calendar" />
+              <Text label={this.getInfoTitle('US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('Intl US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />
+            </Box>
+            <Box title="Input masks" type="info">
+              <Text label={this.getInfoTitle('Date masks:', 'none')} labelPosition="above" iconLeft="fas-calendar" />
+              <Text labelPosition="none" iconLeft="fas-calendar" />
+              <Text label={this.getInfoTitle('US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('Intl US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />
+            </Box>
+          </Col>
+          <Col xs={6}>
+            <Box title="Date picker" type="primary">
+              <Date
+                label={this.getInfoTitle('Date:', 'none')}
+                labelPosition="above"
+                iconLeft="fas-calendar"
+                type="success"
+                value={moment()}
+              />
+              <DateRange
+                type="primary"
+                label={this.getInfoTitle('Date range:', 'none')}
+                labelPosition="above"
+                iconLeft="fas-calendar"
+                startDate={startDate}
+                endDate={endDate}
+                startDateId="startDate"
+                endDateId="endDate"
+                format="DD.MM.YYYY"
+                onStartChange={({ target: { value } }) => { this.setState({ startDate: value }); }}
+                onEndChange={({ target: { value } }) => { this.setState({ endDate: value }); }}
+              />
+              <Text label={this.getInfoTitle('Date and time range:', 'none')} labelPosition="above" iconLeft="far-clock" />
+              <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />
+            </Box>
+            <Box title="iCheck - Checkbox & Radio Inputs" type="success">
+              <ICheck labelPosition="none" iconLeft="fas-calendar" value={1} options={[{ value: 1 }, { value: 2 }, { value: 3, disabled: true }]} />
+              <Text labelPosition="none" iconLeft="fas-calendar" />
+              <Text label={this.getInfoTitle('US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('Intl US phone mask:', 'none')} labelPosition="above" iconLeft="fas-phone" />
+              <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />
+            </Box>
+          </Col>
+        </Row>
       </Content>
     );
   }

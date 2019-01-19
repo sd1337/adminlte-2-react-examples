@@ -61,6 +61,7 @@ class Buttons extends Component {
                       <td><Button block type={p} text={this.initCap(p)} size="xs" /></td>
                       <td><Button block type={p} text={this.initCap(p)} flat /></td>
                       <td><Button block type={p} text={this.initCap(p)} disabled /></td>
+                      <td><Button type={p} icon="fa-edit" /></td>
                     </tr>
                   ))}
                 </tbody>
