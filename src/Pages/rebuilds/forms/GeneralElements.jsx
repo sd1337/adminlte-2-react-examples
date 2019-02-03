@@ -3,10 +3,10 @@ import React from 'react';
 import {
   Content, Row, Col, Box, Button, Inputs, Divider,
 } from 'adminlte-2-react';
-
-const {
-  Text, Checkbox, Radio, Select,
-} = Inputs;
+import { Text, Checkbox, Radio, Select, } from '../../../a2r-local/content/Inputs';
+// const {
+//   Text, Checkbox, Radio, Select,
+// } = Inputs;
 
 const GeneralElements = () => (
   <Content title="General Form Elements" subTitle="Preview" browserTitle="AdminLTE 2 | General Form Elements">
@@ -61,7 +61,7 @@ const GeneralElements = () => (
           </Row>
           <h4>With buttons</h4>
           <p className="margin">
-              Large:
+            Large:
             {' '}
             <code>.input-group.input-group-lg</code>
           </p>
@@ -75,12 +75,12 @@ const GeneralElements = () => (
                 <Divider />
                 <a href="/">Separated link</a>
               </Button>
-              )}
+            )}
           />
           <p className="margin">Normal</p>
           <Text buttonLeft={<Button type="danger" text="Action" />} />
           <p className="margin">
-              Small
+            Small
             {' '}
             <code>.input-group.input-group-sm</code>
           </p>
@@ -97,16 +97,12 @@ const GeneralElements = () => (
               <Button text="Cancel" pullLeft />
               <Button text="Sign in" type="info" pullRight />
             </React.Fragment>
-            )}
+          )}
           border
         >
           <Text name="inputEmail3" placeholder="Email" label="Email" />
           <Text name="inputPassword3" placeholder="Password" label="Password" inputType="password" />
-          <div className="form-group">
-            <Col sm={10} offsetSm={2}>
-              <Checkbox label="Remember me" />
-            </Col>
-          </div>
+          <Checkbox label="Remember me" />
         </Box>
         <Box type="warning" title="General Elements" border>
           <Text label="Text" labelPosition="above" placeholder="Enter ..." />
@@ -116,9 +112,9 @@ const GeneralElements = () => (
           <Text type="success" labelPosition="above" label="Input with success" labelIcon="fas-check" placeholder="Enter ..." help="Help block with success" />
           <Text type="warning" labelPosition="above" label="Input with warning" labelIcon="far-bell" placeholder="Enter ..." help="Help block with warning" />
           <Text type="error" labelPosition="above" label="Input with error" labelIcon="far-times-circle" placeholder="Enter ..." help="Help block with error" />
-          <Checkbox label="Checkbox 1" />
-          <Checkbox label="Checkbox 2" />
-          <Checkbox label="Checkbox disabled" disabled />
+          <Checkbox text="Checkbox 1" labelXs={0} />
+          <Checkbox text="Checkbox 2" labelXs={0} />
+          <Checkbox text="Checkbox disabled" labelXs={0} disabled />
           <Radio
             options={[{
               checked: true, id: 'optionsRadios1', value: 'option1', label: 'Option one is this and that—be sure to include why it\'s great',
@@ -129,7 +125,7 @@ const GeneralElements = () => (
             },
             ]}
             name="optionsRadios"
-            onChange={() => {}}
+            onChange={() => { }}
           />
           <Select
             label="Select"

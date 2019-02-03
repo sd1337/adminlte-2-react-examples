@@ -147,7 +147,7 @@ class App extends Component {
             <Item text="Dashboard v1" to="/dashboard" activeOn="^/$" />
             <Item text="Dashboard v2" to="/dashboardv2" />
           </Item>
-          <Item to="#" text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
+          <Item text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
             <Item text="Top Navigation" to="/top-nav" />
             <Item text="Boxed" to="/boxed" />
             <Item text="Fixed" to="/fixed" />
@@ -159,7 +159,7 @@ class App extends Component {
             <Item text="Morris" to="/morris" />
             <Item text="Flot" to="/flot" />
           </Item>
-          <Item to="#" text="UI Elements" icon="fa-laptop">
+          <Item text="UI Elements" icon="fa-laptop">
             <Item text="General" to="/ui-elements/general" />
             <Item text="Icons" to="/ui-elements/icons" />
             <Item text="Buttons" to="/ui-elements/buttons" />
@@ -167,18 +167,18 @@ class App extends Component {
             <Item text="Timeline" to="/ui-elements/timeline" />
             <Item text="Modals" to="/ui-elements/modals" activeOn="^/ui-elements/modals" />
           </Item>
-          <Item to="#" text="Forms" icon="fa-edit">
+          <Item text="Forms" icon="fa-edit">
             <Item text="General Elements" to="/forms/general" />
             <Item text="Advanced Elements" to="/forms/advanced" />
             <Item text="Editors" to="/forms/editors" />
           </Item>
-          <Item to="#" text="Tables" icon="fa-table">
+          <Item text="Tables" icon="fa-table">
             <Item text="Simple tables" to="/tables/simple" />
             <Item text="Data tables" to="/tables/data" />
           </Item>
           <Item to="/calendar" text="Calendar" icon="fa-calendar" labels={[{ small: true, text: 3, color: 'red' }, { small: true, text: 17, color: 'blue' }]} />
           <Item to="/mailbox" text="Mailbox" icon="fa-envelope" labels={[{ small: true, text: 12, color: 'yellow' }, { small: true, text: 16, color: 'green' }, { small: true, text: 5, color: 'red' }]} />
-          <Item to="#" text="Examples" icon="fa-folder">
+          <Item text="Examples" icon="fa-folder">
             <Item text="Invoice" to="/examples/invoice" />
             <Item text="Profile" to="/examples/profile" />
             <Item text="Login" to="/examples/login" />
@@ -189,7 +189,7 @@ class App extends Component {
             <Item text="Blank Page" to="/examples/blank-page" />
             <Item text="Pace Page" to="/examples/pace-page" />
           </Item>
-          <Item to="#" text="Multilevel" icon="fa-share">
+          <Item text="Multilevel" icon="fa-share">
             <Item text="Level One" to="/mulitlevel/one" />
             <Item text="Level One" to="/mulitlevel/one">
               <Item text="Level Two" to="/mulitlevel/two" />
@@ -202,15 +202,15 @@ class App extends Component {
             <Item text="Level One" to="/mulitlevel/one" />
           </Item>
           <li className="header">LABELS</li>
-          <Item to="#" text="Important" color="red" />
-          <Item to="#" text="Warning" color="yellow" />
-          <Item to="#" text="Information" color="aqua" />
+          <Item text="Important" color="red" />
+          <Item text="Warning" color="yellow" />
+          <Item text="Information" color="aqua" />
         </Sidebar.Core>
         <ComponentBuilder path="/component-builder" />
         <ExamplesWithJSX path="/examples-with-jsx" />
 
         <Dashboard path="/dashboard" exact />
-        <DashboardV2 path={['/', '/dashboardv2']} exact />
+        <DashboardV2 path="/dashboardv2" exact />
         <ChartJS path="/chart-js" exact />
         <Widgets path="/widgets" exact />
         {this.getAsync('/ui-elements/general')}
