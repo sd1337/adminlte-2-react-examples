@@ -89,7 +89,7 @@ class General extends Component {
         {/* TODO: Add Tab Menu */}
         <Row>
           <Col md={6}>
-            <Tabs activeKey="tab_1">
+            <Tabs defaultActiveKey="tab_1">
               <TabContent title="Tab 1" eventKey="tab_1">
                 <b>How to use:</b>
                 <p>
