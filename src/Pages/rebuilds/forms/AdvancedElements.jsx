@@ -184,6 +184,7 @@ class AdvancedElements extends Component {
                 labelPosition="above"
                 iconLeft="fas-calendar"
                 type="success"
+                format="DD.MM.YYYY"
                 value={moment()}
               />
               <DateRange
