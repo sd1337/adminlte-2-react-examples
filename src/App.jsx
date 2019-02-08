@@ -8,7 +8,6 @@ import Dashboard from './pages/rebuilds/Dashboard';
 import DashboardV2 from './pages/rebuilds/DashboardV2';
 import ChartJS from './pages/rebuilds/charts/ChartJS';
 import Widgets from './pages/rebuilds/Widgets';
-import 'source-sans-pro/source-sans-pro.css';
 
 const { Item, Header } = Sidebar;
 class App extends Component {
