@@ -200,7 +200,15 @@ class AdvancedElements extends Component {
                 onStartChange={({ target: { value } }) => { this.setState({ startDate: value }); }}
                 onEndChange={({ target: { value } }) => { this.setState({ endDate: value }); }}
               />
-              <Text label={this.getInfoTitle('Date and time range:', 'none')} labelPosition="above" iconLeft="far-clock" />
+              <Date
+                label={this.getInfoTitle('Date:', 'none')}
+                labelPosition="above"
+                iconLeft="fas-calendar"
+                type="success"
+                format="DD.MM.YYYY"
+                disabled
+                inputIconPosition="before"
+              />
               <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />
             </Box>
             <Box title="iCheck - Checkbox & Radio Inputs" type="success">

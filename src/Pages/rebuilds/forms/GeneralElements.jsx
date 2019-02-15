@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Content, Row, Col, Box, Button, Inputs, Divider,
 } from 'adminlte-2-react';
-import { Text, Checkbox, Radio, Select, } from '../../../a2r-local/content/Inputs';
+import { Text, Checkbox, Radio, Select, } from 'adminlte-2-react';
 // const {
 //   Text, Checkbox, Radio, Select,
 // } = Inputs;
