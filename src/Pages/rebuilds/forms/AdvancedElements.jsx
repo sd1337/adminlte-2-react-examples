@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 
 import Select2 from '../../../a2r-local/content/Inputs/Select2';
+import DateTime from '../../../a2r-local/content/Inputs/DateTime';
 import InfoModal from '../InfoModal';
 import {
   select21, select22, select23, select24,
@@ -207,6 +208,15 @@ class AdvancedElements extends Component {
                 type="success"
                 format="DD.MM.YYYY"
                 disabled
+                inputIconPosition="before"
+              />
+              <DateTime
+                label={this.getInfoTitle('Date:', 'none')}
+                labelPosition="above"
+                iconLeft="fas-calendar"
+                // type="success"
+                format="DD.MM.YYYY"
+                // disabled
                 inputIconPosition="before"
               />
               <Text label={this.getInfoTitle('IP mask:', 'none')} labelPosition="above" iconLeft="fa-laptop" />

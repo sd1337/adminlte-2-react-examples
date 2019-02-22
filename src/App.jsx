@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import AdminLTE, { Sidebar, AsyncComponent, Footer } from 'adminlte-2-react';
+import AdminLTE, {
+  Sidebar, AsyncComponent, Footer, Navbar,
+} from 'adminlte-2-react';
+import moment from 'moment';
+
 import ComponentBuilder from './pages/ComponentBuilder';
 import ExamplesWithJSX from './pages/ExamplesWithJSX';
 
@@ -8,8 +12,13 @@ import Dashboard from './pages/rebuilds/Dashboard';
 import DashboardV2 from './pages/rebuilds/DashboardV2';
 import ChartJS from './pages/rebuilds/charts/ChartJS';
 import Widgets from './pages/rebuilds/Widgets';
+import user1Image from './assets/img/user1-128x128.jpg';
+import user2Image from './assets/img/user2-160x160.jpg';
+import user3Image from './assets/img/user3-128x128.jpg';
+import user4Image from './assets/img/user4-128x128.jpg';
 
 const { Item, Header } = Sidebar;
+const { MessageItem, Entry, NotificationItem, TaskItem } = Navbar;
 class App extends Component {
   state = {}
 
@@ -133,11 +142,122 @@ class App extends Component {
       }
     };
     return <Route path={path} exact component={asyncRequire(path)} />;
-  }
+  } 
+
+  messageMenu = [
+    {
+      text: 'Support Team',
+      subText: 'Why not buy a new awesome theme?',
+      imageUrl: user1Image,
+      when: moment().subtract(5, 'minutes'),
+    },
+    {
+      text: 'AdminLTE Design Team',
+      subText: 'Why not buy a new awesome theme?',
+      imageUrl: user2Image,
+      when: moment().subtract(2, 'hours'),
+    },
+    {
+      text: 'Developers',
+      subText: 'Why not buy a new awesome theme?',
+      imageUrl: user3Image,
+      when: moment().subtract(13, 'hours'),
+    },
+    {
+      text: 'Sales departement',
+      subText: 'Why not buy a new awesome theme?',
+      imageUrl: user4Image,
+      when: moment().subtract(1, 'day'),
+    },
+    {
+      text: 'Reviewers',
+      subText: 'Why not buy a new awesome theme?',
+      imageUrl: user3Image,
+      when: moment().subtract(2, 'days'),
+    },
+  ]
+
+  notificationMenu = [
+    {
+      icon: 'fas-users',
+      iconColor: 'aqua',
+      text: '5 new members joined today',
+    },
+    {
+      icon: 'fas-exclamation-triangle',
+      iconColor: 'yellow',
+      text: ' Very long description here that may not fit into the page and may cause design problems',
+    },
+    {
+      icon: 'fas-users',
+      iconColor: 'red',
+      text: '5 new members joined today',
+    },
+    {
+      icon: 'fas-shopping-cart',
+      iconColor: 'green',
+      text: '25 sales made',
+    },
+    {
+      icon: 'fas-user',
+      iconColor: 'red',
+      text: 'You changed your username',
+    },
+  ]
+
+  taskMenu = [
+    {
+      value: 20,
+      barColor: 'aqua',
+      text: 'Design some buttons',
+    },
+    {
+      value: 40,
+      barColor: 'green',
+      text: 'Create a nice theme',
+    },
+    {
+      value: 60,
+      barColor: 'red',
+      text: 'Some task I need to do',
+    },
+    {
+      value: 80,
+      barColor: 'yellow',
+      text: 'Make beautiful transitions',
+    },
+  ]
 
   render() {
     return (
       <AdminLTE browserTitle="adminlte-2-react-examples" theme="black" footer={<Footer />}>
+        <Navbar.Core>
+          <Entry
+            icon="fas-envelope"
+          >
+            {this.messageMenu.map(p => <MessageItem {...p} />)}
+            {this.notificationMenu.map(p => <NotificationItem {...p} />)}
+          </Entry>
+          <Entry
+            icon="fas-bell"
+            className="notifications-menu"
+            labelType="warning"
+          >
+            {this.notificationMenu.map(p => <NotificationItem {...p} />)}
+          </Entry>
+          <Entry
+            icon="far-flag"
+            className="tasks-menu"
+            labelType="danger"
+            headerText="You have #value# tasks"
+            footerText="View all tasks"
+          >
+            {this.taskMenu.map(p => <TaskItem {...p} />)}
+          </Entry>
+          <Entry
+            icon="fas-power-off"
+          />
+        </Navbar.Core>
         <Sidebar.Core>
           <Item icon="fas-pencil-ruler" text="Component Builder" to="/component-builder" />
           <Item icon="fas-code" text="Examples with JSX" to="/examples-with-jsx" />

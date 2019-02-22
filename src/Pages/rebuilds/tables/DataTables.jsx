@@ -1,8 +1,9 @@
 
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 import {
-  Content, Row, Box, Col, DataTable,
+  Content, Row, Box, Col, DataTable, Button,
 } from 'adminlte-2-react';
 
 const DataTables = () => {
@@ -209,9 +210,20 @@ const DataTables = () => {
           </Box>
           <Box title="Data Table With Full Features">
             <DataTable
-              columns={firstColumns}
+              columns={firstColumns.concat([{ title: 'Actions', data:null, render: (data, idx, rowData) => {
+                // debugger;
+                return ReactDOMServer.renderToString(<Button text="Action" className="on-click-event"/>);
+              } }])}
               data={data}
               footer
+              options={{
+                // select: 'single'
+              }}
+              onClickEvents={{
+                onClickEvent: (data, rowIdx, rowData) => {
+                  debugger;
+                }
+              }}
             />
           </Box>
         </Col>
