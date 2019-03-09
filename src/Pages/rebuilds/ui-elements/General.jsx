@@ -3,8 +3,11 @@ import { Panel, PanelGroup } from 'react-bootstrap';
 import uuidv4 from 'uuid';
 
 import {
-  Content, Row, Col, Box, Alert, Callout, Tabs, TabContent, ProgressBar,
+  Content, Row, Col, Box, Alert, Callout, ProgressBar, // Tabs, TabContent,
 } from 'adminlte-2-react';
+
+import Tabs from '../../../a2r-local/content/Tabs';
+import TabContent from '../../../a2r-local/content/TabContent';
 import './General.css';
 
 

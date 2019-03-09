@@ -146,7 +146,8 @@ class Widgets extends Component {
             </Box>
           </Col>
         </Row>
-      </Content>);
+      </Content>
+);
   }
 }
 

@@ -18,12 +18,15 @@ import user3Image from './assets/img/user3-128x128.jpg';
 import user4Image from './assets/img/user4-128x128.jpg';
 
 const { Item, Header } = Sidebar;
-const { MessageItem, Entry, NotificationItem, TaskItem } = Navbar;
+const {
+  MessageItem, Entry, NotificationItem, TaskItem,
+} = Navbar;
 class App extends Component {
   state = {}
 
   loadedElements = {}
 
+  // eslint-disable-next-line react/sort-comp
   getAsync(path) {
     const asyncRequire = () => {
       switch (path) {
@@ -104,6 +107,17 @@ class App extends Component {
             this.loadedElements[path] = newElem;
             return newElem;
           });
+        case '/forms/formik':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'calendar' */'./pages/new/FormikForm');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
         case '/tables/simple':
           return AsyncComponent(() => {
             if (this.loadedElements[path]) {
@@ -126,6 +140,17 @@ class App extends Component {
             this.loadedElements[path] = newElem;
             return newElem;
           });
+        case '/tables/data-extended':
+          return AsyncComponent(() => {
+            if (this.loadedElements[path]) {
+              console.log('cached');
+              return this.loadedElements[path];
+            }
+            console.log('loading');
+            const newElem = import(/* webpackChunkName: 'tables.data' */'./pages/new/DatatablesExtended');
+            this.loadedElements[path] = newElem;
+            return newElem;
+          });
         case '/calendar':
           return AsyncComponent(() => {
             if (this.loadedElements[path]) {
@@ -142,7 +167,7 @@ class App extends Component {
       }
     };
     return <Route path={path} exact component={asyncRequire(path)} />;
-  } 
+  }
 
   messageMenu = [
     {
@@ -289,11 +314,13 @@ class App extends Component {
           <Item text="Forms" icon="fa-edit">
             <Item text="General Elements" to="/forms/general" />
             <Item text="Advanced Elements" to="/forms/advanced" />
+            <Item text="Formik form" to="/forms/formik" labels={[{ small: true, text: 'new', color: 'red' }]} />
             <Item text="Editors" to="/forms/editors" />
           </Item>
           <Item text="Tables" icon="fa-table">
             <Item text="Simple tables" to="/tables/simple" />
             <Item text="Data tables" to="/tables/data" />
+            <Item text="Data tables extended" to="/tables/data-extended" labels={[{ small: true, text: 'new', color: 'red' }]} />
           </Item>
           <Item to="/calendar" text="Calendar" icon="fa-calendar" labels={[{ small: true, text: 3, color: 'red' }, { small: true, text: 17, color: 'blue' }]} />
           <Item to="/mailbox" text="Mailbox" icon="fa-envelope" labels={[{ small: true, text: 12, color: 'yellow' }, { small: true, text: 16, color: 'green' }, { small: true, text: 5, color: 'red' }]} />
@@ -342,6 +369,8 @@ class App extends Component {
         {this.getAsync('/tables/simple')}
         {this.getAsync('/tables/data')}
         {this.getAsync('/calendar')}
+        {this.getAsync('/forms/formik')}
+        {this.getAsync('/tables/data-extended')}
       </AdminLTE>
     );
   }
