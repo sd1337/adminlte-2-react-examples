@@ -38,10 +38,11 @@ const DataTables = () => {
           </Box>
           <Box title="Data Table With Full Features">
             <DataTable
-              columns={firstColumns.concat([{ title: 'Actions', data:null, render: (data, idx, rowData) => {
-                // debugger;
-                return ReactDOMServer.renderToString(<Button text="Action" className="on-click-event"/>);
-              } }])}
+              columns={firstColumns.concat([{
+                title: 'Actions',
+                data: null,
+                render: () => <Button text="Action" className="on-click-event" />,
+              }])}
               data={data}
               footer
               options={{
@@ -50,7 +51,7 @@ const DataTables = () => {
               onClickEvents={{
                 onClickEvent: (data, rowIdx, rowData) => {
                   debugger;
-                }
+                },
               }}
             />
           </Box>

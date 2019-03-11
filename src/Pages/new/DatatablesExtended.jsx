@@ -17,7 +17,22 @@ const firstColumns = [
   { title: 'Browser', data: 'browser' },
   { title: 'Platform(s)', data: 'platform' },
   { title: 'Engine version', data: 'engineVersion' },
-  { title: 'CSS grade', data: 'cssGrade' },
+  {
+    title: 'CSS grade',
+    data: 'cssGrade',
+    render: (cssGrade) => {
+      switch (cssGrade) {
+        case 'A':
+          return <div className="text-green">{cssGrade}</div>;
+        case 'C':
+          return <div className="text-yellow">{cssGrade}</div>;
+        case 'Z':
+          return <div className="text-red">{cssGrade}</div>;
+        default:
+          return cssGrade;
+      }
+    },
+  },
 ];
 
 class DatatablesExtended extends Component {
@@ -25,6 +40,8 @@ class DatatablesExtended extends Component {
     selectedRows: undefined,
     selectedEngine: undefined,
     useFooter: false,
+    activePage: 0,
+    order: { column: 'engine', direction: 'asc' },
   }
 
   constructor() {
@@ -57,7 +74,9 @@ class DatatablesExtended extends Component {
   }
 
   render() {
-    const { selectedRows, selectedEngine, useFooter } = this.state;
+    const {
+      selectedRows, selectedEngine, useFooter, activePage, order,
+    } = this.state;
     let localData;
     if (selectedEngine && selectedEngine.length > 0) {
       localData = data.filter(({ engine }) => selectedEngine.indexOf(engine) > -1);
@@ -101,14 +120,15 @@ class DatatablesExtended extends Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <Box title="Hover Data Table">
+            <Box title="Externally controlled selection">
               <DataTable
                 columns={firstColumns}
                 options={{
                   // paging: true,
-                  lengthChange: false,
+                  // lengthChange: false,
                   searching: false,
                   // info: false,
+                  lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
                   autoWidth: false,
                   select: true,
                   rowId: 'browser',
@@ -117,6 +137,39 @@ class DatatablesExtended extends Component {
                 footer={useFooter}
                 selectedRows={selectedRows}
                 onSelect={this.handleRowSelect}
+                order={[order]}
+              />
+            </Box>
+          </Col>
+          <Col xs={12}>
+            <Box title="Externally controlled data">
+              <DataTable
+                columns={firstColumns}
+                options={{
+                  searching: false,
+                  autoWidth: false,
+                  select: true,
+                  rowId: 'browser',
+                }}
+                data={localData.sort((a, b) => {
+                  if (a[order.column].toLowerCase() < b[order.column].toLowerCase()) { return order.direction === 'asc' ? -1 : 1; }
+                  if (a[order.column].toLowerCase() > b[order.column].toLowerCase()) { return order.direction === 'asc' ? 1 : -1; }
+                  return 0;
+                }).slice(10 * activePage, 10 * activePage + 10)}
+                footer={useFooter}
+                selectedRows={selectedRows}
+                onSelect={this.handleRowSelect}
+                page={activePage}
+                pageSize={10}
+                // totalElements={data.length}
+                hasMore={localData.slice(10 * activePage, 10 * activePage + 10).length === 10}
+                onPageChange={(page) => {
+                  this.setState({ activePage: page });
+                }}
+                onOrderChange={(newOrder) => {
+                  // debugger;
+                  this.setState({ order: newOrder[0] });
+                }}
               />
             </Box>
           </Col>
