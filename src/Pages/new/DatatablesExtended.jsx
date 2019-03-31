@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Content, Row, Box, Col, Inputs,
+  Content, Row, Box, Col, Inputs, LoadingSpinner, Button,
+  DataTable
 } from 'adminlte-2-react';
-
-import DataTable from '../../a2r-local/content/DataTable';
 
 import data from '../../common/Browsers';
 
@@ -33,6 +32,17 @@ const firstColumns = [
       }
     },
   },
+  {
+    title: 'Buttons',
+    data: null,
+    render: () => (
+      <Button
+        icon="fa-info"
+        className="clickable"
+      />
+    )
+    ,
+  },
 ];
 
 class DatatablesExtended extends Component {
@@ -42,6 +52,7 @@ class DatatablesExtended extends Component {
     useFooter: false,
     activePage: 0,
     order: { column: 'engine', direction: 'asc' },
+    filteredData: undefined,
   }
 
   constructor() {
@@ -49,6 +60,32 @@ class DatatablesExtended extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
     this.handleEngineChange = this.handleEngineChange.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    this.setState({ loading: true });
+    const waitTime = Math.random() * 2000;
+    setTimeout(() => {
+      const { order, activePage, selectedEngine } = this.state;
+      let localData;
+      if (selectedEngine && selectedEngine.length > 0) {
+        localData = data.filter(({ engine }) => selectedEngine.indexOf(engine) > -1);
+      } else {
+        localData = data;
+      }
+      const filteredData = localData.sort((a, b) => {
+        if (a[order.column].toLowerCase() < b[order.column].toLowerCase()) { return order.direction === 'asc' ? -1 : 1; }
+        if (a[order.column].toLowerCase() > b[order.column].toLowerCase()) { return order.direction === 'asc' ? 1 : -1; }
+        return 0;
+      }).slice(10 * activePage, 10 * activePage + 10);
+      const hasMore = filteredData.slice(10 * activePage, 10 * activePage + 10).length === 10;
+      this.setState({ filteredData, loading: false, hasMore });
+    }, waitTime);
   }
 
   handleChange(event) {
@@ -59,6 +96,7 @@ class DatatablesExtended extends Component {
   handleEngineChange(event) {
     const { params: { data } } = event;
     this.setState({ selectedEngine: data });
+    this.getData();
   }
 
   handleRowSelect(data) {
@@ -75,7 +113,7 @@ class DatatablesExtended extends Component {
 
   render() {
     const {
-      selectedRows, selectedEngine, useFooter, activePage, order,
+      selectedRows, selectedEngine, useFooter, activePage, order, filteredData, loading, hasMore,
     } = this.state;
     let localData;
     if (selectedEngine && selectedEngine.length > 0) {
@@ -130,7 +168,7 @@ class DatatablesExtended extends Component {
                   // info: false,
                   lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
                   autoWidth: false,
-                  select: true,
+                  // select: true,
                   rowId: 'browser',
                 }}
                 data={localData}
@@ -138,39 +176,55 @@ class DatatablesExtended extends Component {
                 selectedRows={selectedRows}
                 onSelect={this.handleRowSelect}
                 order={[order]}
+                onClickEvents={{
+                  clickable: () => {
+                    // debugger;
+                    alert('works');
+                  },
+                }}
+                id="externally-controlled"
               />
             </Box>
           </Col>
           <Col xs={12}>
             <Box title="Externally controlled data">
               <DataTable
+                id="external-data"
                 columns={firstColumns}
                 options={{
-                  searching: false,
+                  // searching: false,
                   autoWidth: false,
                   select: true,
                   rowId: 'browser',
                 }}
-                data={localData.sort((a, b) => {
-                  if (a[order.column].toLowerCase() < b[order.column].toLowerCase()) { return order.direction === 'asc' ? -1 : 1; }
-                  if (a[order.column].toLowerCase() > b[order.column].toLowerCase()) { return order.direction === 'asc' ? 1 : -1; }
-                  return 0;
-                }).slice(10 * activePage, 10 * activePage + 10)}
+                data={filteredData}
                 footer={useFooter}
                 selectedRows={selectedRows}
                 onSelect={this.handleRowSelect}
                 page={activePage}
                 pageSize={10}
-                // totalElements={data.length}
-                hasMore={localData.slice(10 * activePage, 10 * activePage + 10).length === 10}
+                totalElements={(filteredData && localData.length) || 0}
+                // hasMore={hasMore}
                 onPageChange={(page) => {
                   this.setState({ activePage: page });
+                  this.getData();
                 }}
                 onOrderChange={(newOrder) => {
-                  // debugger;
                   this.setState({ order: newOrder[0] });
+                  this.getData();
+                }}
+                onSearchChange={(searchData) => {
+                  console.log('searchValue', searchData);
+                }}
+                // searchValue="firefox"
+                onClickEvents={{
+                  clickable: () => {
+                    // debugger;
+                    alert('works');
+                  },
                 }}
               />
+              {loading && <LoadingSpinner />}
             </Box>
           </Col>
         </Row>

@@ -5,15 +5,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 
-import Select2 from '../../../a2r-local/content/Inputs/Select2';
-import DateTime from '../../../a2r-local/content/Inputs/DateTime';
 import InfoModal from '../InfoModal';
 import {
   select21, select22, select23, select24,
 } from './AdvancedElements.Info';
 
 const {
-  Text, Date, DateRange, ICheck,
+  Text, Date, DateRange, ICheck, Select2, DateTime,
 } = Inputs;
 
 class AdvancedElements extends Component {

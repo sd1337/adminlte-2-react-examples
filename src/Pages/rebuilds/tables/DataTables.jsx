@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import {
-  Content, Row, Box, Col, DataTable, Button,
+  Content, Row, Box, Col, Button, DataTable,
 } from 'adminlte-2-react';
 
 import data from '../../../common/Browsers';
